@@ -7,3 +7,7 @@ Porque la tabla de Glue se creó con *partition projection* desde el despliegue 
 ## 2. Si se subiera un archivo para el 4 de octubre manteniendo la configuración actual, ¿qué resultado se esperaría y qué se debería modificar para incluirlo?
 
 Con la configuración actual no se vería en las consultas. El archivo quedaría guardado en S3, pero `2026-10-04` está fuera del rango proyectado (`2026-10-01` a `2026-10-03`), así que Athena no calcula esa partición. Las consultas no darían error: simplemente seguirían devolviendo los 18 registros y los mismos resultados agregados, sin ninguna fila del 4 de octubre. Para incluirlo habría que ampliar el rango en la propiedad `projection.fecha.range` de la tabla, es decir, cambiar la variable `fecha_final` a `2026-10-04` en Terraform y aplicar el cambio (`terraform apply`). Esto actualiza solo los metadatos de la tabla. El archivo debe respetar la ruta `entregas/fecha=2026-10-04/entregas.csv` y el mismo esquema de cinco columnas. Otra opción es usar `NOW` como fin del rango (`2026-10-01,NOW`), para que las fechas nuevas se incluyan solas, aunque entonces se proyectarían días sin datos.
+
+---
+
+**Hilo de la IA usado en este examen:** https://claude.ai/share/6c21f893-2e1b-4caf-bf0c-c2350794994c

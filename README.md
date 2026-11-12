@@ -106,3 +106,9 @@ evidencias/       aplicacion_terraform.txt  outputs.json  ejecuciones_athena.csv
 scripts/          ejecutar_athena.py  comparar_resultados.sh
 data/  resultados_esperados/   (material suministrado, sin modificar)
 ```
+
+## Hilo de la IA
+
+Para resolver este examen se usó un asistente de IA (Claude). El hilo completo de la conversación está en este enlace: https://claude.ai/share/6c21f893-2e1b-4caf-bf0c-c2350794994c
+
+El enlace también se guardó en `hilo_IA/enlace_hilo.md`.
