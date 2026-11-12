@@ -1,0 +1,276 @@
+data.aws_caller_identity.actual: Reading...
+aws_glue_catalog_database.entregas: Refreshing state... [id=802655955683:entregas_jjrp_db]
+data.aws_caller_identity.actual: Read complete after 0s [id=802655955683]
+aws_s3_bucket.datos: Refreshing state... [id=entregas-jjrp-802655955683]
+aws_s3_bucket_public_access_block.datos: Refreshing state... [id=entregas-jjrp-802655955683]
+aws_s3_object.prefijo_resultados: Refreshing state... [id=resultados-athena/]
+aws_s3_object.prefijo_entregas: Refreshing state... [id=entregas/]
+aws_glue_catalog_table.entregas: Refreshing state... [id=802655955683:entregas_jjrp_db:entregas_jjrp]
+aws_athena_workgroup.entregas: Refreshing state... [id=entregas-jjrp-wg]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # aws_athena_workgroup.entregas will be destroyed
+  - resource "aws_athena_workgroup" "entregas" {
+      - arn           = "arn:aws:athena:us-east-2:802655955683:workgroup/entregas-jjrp-wg" -> null
+      - force_destroy = true -> null
+      - id            = "entregas-jjrp-wg" -> null
+      - name          = "entregas-jjrp-wg" -> null
+      - state         = "ENABLED" -> null
+      - tags          = {
+          - "autor"    = "jjrp"
+          - "proyecto" = "final-ingenieria-datos"
+        } -> null
+      - tags_all      = {
+          - "autor"    = "jjrp"
+          - "proyecto" = "final-ingenieria-datos"
+        } -> null
+        # (1 unchanged attribute hidden)
+
+      - configuration {
+          - bytes_scanned_cutoff_per_query     = 0 -> null
+          - enforce_workgroup_configuration    = true -> null
+          - publish_cloudwatch_metrics_enabled = false -> null
+          - requester_pays_enabled             = false -> null
+            # (1 unchanged attribute hidden)
+
+          - engine_version {
+              - effective_engine_version = "Athena engine version 3" -> null
+              - selected_engine_version  = "Athena engine version 3" -> null
+            }
+
+          - result_configuration {
+              - output_location       = "s3://entregas-jjrp-802655955683/resultados-athena/" -> null
+                # (1 unchanged attribute hidden)
+            }
+        }
+    }
+
+  # aws_glue_catalog_database.entregas will be destroyed
+  - resource "aws_glue_catalog_database" "entregas" {
+      - arn          = "arn:aws:glue:us-east-2:802655955683:database/entregas_jjrp_db" -> null
+      - catalog_id   = "802655955683" -> null
+      - description  = "Base de datos del examen final: entregas de mensajeria" -> null
+      - id           = "802655955683:entregas_jjrp_db" -> null
+      - name         = "entregas_jjrp_db" -> null
+      - parameters   = {} -> null
+      - tags         = {} -> null
+      - tags_all     = {} -> null
+        # (1 unchanged attribute hidden)
+
+      - create_table_default_permission {
+          - permissions = [
+              - "ALL",
+            ] -> null
+
+          - principal {
+              - data_lake_principal_identifier = "IAM_ALLOWED_PRINCIPALS" -> null
+            }
+        }
+    }
+
+  # aws_glue_catalog_table.entregas will be destroyed
+  - resource "aws_glue_catalog_table" "entregas" {
+      - arn                = "arn:aws:glue:us-east-2:802655955683:table/entregas_jjrp_db/entregas_jjrp" -> null
+      - catalog_id         = "802655955683" -> null
+      - database_name      = "entregas_jjrp_db" -> null
+      - id                 = "802655955683:entregas_jjrp_db:entregas_jjrp" -> null
+      - name               = "entregas_jjrp" -> null
+      - parameters         = {
+          - "EXTERNAL"                       = "TRUE"
+          - "classification"                 = "csv"
+          - "projection.enabled"             = "true"
+          - "projection.fecha.format"        = "yyyy-MM-dd"
+          - "projection.fecha.interval"      = "1"
+          - "projection.fecha.interval.unit" = "DAYS"
+          - "projection.fecha.range"         = "2026-10-01,2026-10-03"
+          - "projection.fecha.type"          = "date"
+          - "skip.header.line.count"         = "1"
+          - "storage.location.template"      = "s3://entregas-jjrp-802655955683/entregas/fecha=${fecha}/"
+        } -> null
+      - retention          = 0 -> null
+      - table_type         = "EXTERNAL_TABLE" -> null
+        # (4 unchanged attributes hidden)
+
+      - partition_keys {
+          - name    = "fecha" -> null
+          - type    = "string" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - storage_descriptor {
+          - additional_locations      = [] -> null
+          - bucket_columns            = [] -> null
+          - compressed                = false -> null
+          - input_format              = "org.apache.hadoop.mapred.TextInputFormat" -> null
+          - location                  = "s3://entregas-jjrp-802655955683/entregas/" -> null
+          - number_of_buckets         = 0 -> null
+          - output_format             = "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat" -> null
+          - parameters                = {} -> null
+          - stored_as_sub_directories = false -> null
+
+          - columns {
+              - name       = "id_envio" -> null
+              - parameters = {} -> null
+              - type       = "string" -> null
+                # (1 unchanged attribute hidden)
+            }
+          - columns {
+              - name       = "ciudad" -> null
+              - parameters = {} -> null
+              - type       = "string" -> null
+                # (1 unchanged attribute hidden)
+            }
+          - columns {
+              - name       = "transportadora" -> null
+              - parameters = {} -> null
+              - type       = "string" -> null
+                # (1 unchanged attribute hidden)
+            }
+          - columns {
+              - name       = "estado" -> null
+              - parameters = {} -> null
+              - type       = "string" -> null
+                # (1 unchanged attribute hidden)
+            }
+          - columns {
+              - name       = "duracion_minutos" -> null
+              - parameters = {} -> null
+              - type       = "int" -> null
+                # (1 unchanged attribute hidden)
+            }
+
+          - ser_de_info {
+              - name                  = "csv" -> null
+              - parameters            = {
+                  - "field.delim"          = ","
+                  - "serialization.format" = ","
+                } -> null
+              - serialization_library = "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe" -> null
+            }
+        }
+    }
+
+  # aws_s3_bucket.datos will be destroyed
+  - resource "aws_s3_bucket" "datos" {
+      - arn                         = "arn:aws:s3:::entregas-jjrp-802655955683" -> null
+      - bucket                      = "entregas-jjrp-802655955683" -> null
+      - bucket_domain_name          = "entregas-jjrp-802655955683.s3.amazonaws.com" -> null
+      - bucket_regional_domain_name = "entregas-jjrp-802655955683.s3.us-east-2.amazonaws.com" -> null
+      - force_destroy               = true -> null
+      - hosted_zone_id              = "Z2O1EMRO9K5GLX" -> null
+      - id                          = "entregas-jjrp-802655955683" -> null
+      - object_lock_enabled         = false -> null
+      - region                      = "us-east-2" -> null
+      - request_payer               = "BucketOwner" -> null
+      - tags                        = {
+          - "autor"    = "jjrp"
+          - "proyecto" = "final-ingenieria-datos"
+        } -> null
+      - tags_all                    = {
+          - "autor"    = "jjrp"
+          - "proyecto" = "final-ingenieria-datos"
+        } -> null
+        # (3 unchanged attributes hidden)
+
+      - grant {
+          - id          = "7a084156d72c34d86f34be23b3afee66b43fd4916eb5ad3c18491a55e6876766" -> null
+          - permissions = [
+              - "FULL_CONTROL",
+            ] -> null
+          - type        = "CanonicalUser" -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - server_side_encryption_configuration {
+          - rule {
+              - bucket_key_enabled = false -> null
+
+              - apply_server_side_encryption_by_default {
+                  - sse_algorithm     = "AES256" -> null
+                    # (1 unchanged attribute hidden)
+                }
+            }
+        }
+
+      - versioning {
+          - enabled    = false -> null
+          - mfa_delete = false -> null
+        }
+    }
+
+  # aws_s3_bucket_public_access_block.datos will be destroyed
+  - resource "aws_s3_bucket_public_access_block" "datos" {
+      - block_public_acls       = true -> null
+      - block_public_policy     = true -> null
+      - bucket                  = "entregas-jjrp-802655955683" -> null
+      - id                      = "entregas-jjrp-802655955683" -> null
+      - ignore_public_acls      = true -> null
+      - restrict_public_buckets = true -> null
+    }
+
+  # aws_s3_object.prefijo_entregas will be destroyed
+  - resource "aws_s3_object" "prefijo_entregas" {
+      - arn                           = "arn:aws:s3:::entregas-jjrp-802655955683/entregas/" -> null
+      - bucket                        = "entregas-jjrp-802655955683" -> null
+      - bucket_key_enabled            = false -> null
+      - content_type                  = "application/octet-stream" -> null
+      - etag                          = "d41d8cd98f00b204e9800998ecf8427e" -> null
+      - force_destroy                 = false -> null
+      - id                            = "entregas/" -> null
+      - key                           = "entregas/" -> null
+      - metadata                      = {} -> null
+      - server_side_encryption        = "AES256" -> null
+      - storage_class                 = "STANDARD" -> null
+      - tags                          = {} -> null
+      - tags_all                      = {} -> null
+        # (15 unchanged attributes hidden)
+    }
+
+  # aws_s3_object.prefijo_resultados will be destroyed
+  - resource "aws_s3_object" "prefijo_resultados" {
+      - arn                           = "arn:aws:s3:::entregas-jjrp-802655955683/resultados-athena/" -> null
+      - bucket                        = "entregas-jjrp-802655955683" -> null
+      - bucket_key_enabled            = false -> null
+      - content_type                  = "application/octet-stream" -> null
+      - etag                          = "d41d8cd98f00b204e9800998ecf8427e" -> null
+      - force_destroy                 = false -> null
+      - id                            = "resultados-athena/" -> null
+      - key                           = "resultados-athena/" -> null
+      - metadata                      = {} -> null
+      - server_side_encryption        = "AES256" -> null
+      - storage_class                 = "STANDARD" -> null
+      - tags                          = {} -> null
+      - tags_all                      = {} -> null
+        # (15 unchanged attributes hidden)
+    }
+
+Plan: 0 to add, 0 to change, 7 to destroy.
+
+Changes to Outputs:
+  - base_datos           = "entregas_jjrp_db" -> null
+  - bucket               = "entregas-jjrp-802655955683" -> null
+  - region               = "us-east-2" -> null
+  - tabla                = "entregas_jjrp" -> null
+  - ubicacion_resultados = "s3://entregas-jjrp-802655955683/resultados-athena/" -> null
+  - workgroup            = "entregas-jjrp-wg" -> null
+aws_s3_bucket_public_access_block.datos: Destroying... [id=entregas-jjrp-802655955683]
+aws_athena_workgroup.entregas: Destroying... [id=entregas-jjrp-wg]
+aws_s3_object.prefijo_entregas: Destroying... [id=entregas/]
+aws_glue_catalog_table.entregas: Destroying... [id=802655955683:entregas_jjrp_db:entregas_jjrp]
+aws_s3_object.prefijo_entregas: Destruction complete after 0s
+aws_athena_workgroup.entregas: Destruction complete after 1s
+aws_s3_object.prefijo_resultados: Destroying... [id=resultados-athena/]
+aws_s3_bucket_public_access_block.datos: Destruction complete after 1s
+aws_s3_object.prefijo_resultados: Destruction complete after 0s
+aws_glue_catalog_table.entregas: Destruction complete after 1s
+aws_glue_catalog_database.entregas: Destroying... [id=802655955683:entregas_jjrp_db]
+aws_s3_bucket.datos: Destroying... [id=entregas-jjrp-802655955683]
+aws_glue_catalog_database.entregas: Destruction complete after 0s
+aws_s3_bucket.datos: Destruction complete after 2s
+
+Destroy complete! Resources: 7 destroyed.
