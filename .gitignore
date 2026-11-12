@@ -1,0 +1,28 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+crash.log
+crash.*.log
+*.tfplan
+tfplan
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Credenciales
+.env
+.env.*
+.aws/
+credentials
+*.pem
+*.key
+*.csv.bak
+
+# Python / sistema
+__pycache__/
+*.pyc
+.DS_Store

@@ -1,0 +1,32 @@
+{
+  "base_datos": {
+    "sensitive": false,
+    "type": "string",
+    "value": "entregas_jjrp_db"
+  },
+  "bucket": {
+    "sensitive": false,
+    "type": "string",
+    "value": "entregas-jjrp-802655955683"
+  },
+  "region": {
+    "sensitive": false,
+    "type": "string",
+    "value": "us-east-2"
+  },
+  "tabla": {
+    "sensitive": false,
+    "type": "string",
+    "value": "entregas_jjrp"
+  },
+  "ubicacion_resultados": {
+    "sensitive": false,
+    "type": "string",
+    "value": "s3://entregas-jjrp-802655955683/resultados-athena/"
+  },
+  "workgroup": {
+    "sensitive": false,
+    "type": "string",
+    "value": "entregas-jjrp-wg"
+  }
+}
